@@ -1,0 +1,32 @@
+{%extends "base.html"%}
+{%load i18n%}
+{%block scripts%}
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js "></script>
+	<script>
+		$(function(){
+		jQuery.fn.slugify = function(obj) {
+    		jQuery(this).data('obj', jQuery(obj));
+    		jQuery(this).keyup(function() {
+        	var obj = jQuery(this).data('obj');
+        	var slug = jQuery(this).val().replace(/\s+/g,'-').replace(/[^a-zA-Z0-9\-]/g,'').toLowerCase();
+        	obj.val(slug);
+    	});		
+    	}
+    	//convert the title in a slug
+		$('#id_title').slugify('#id_slug');	
+		});
+		
+    	
+    	
+	</script>
+{%endblock%}
+{%block content%}
+	<h1>{%trans "Create new entry"%}</h1>
+	<form id="edit-entry" action="/blog/entry/new/" method="post">
+		{{form.as_p}}
+		<button class="submit-post" type="submit">
+			<img src="/images/check.png"></img>
+			<span>Post</span>
+		</button>
+	</form>
+{%endblock%}

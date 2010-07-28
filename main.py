@@ -1,3 +1,5 @@
+#THIS PROJECT IS BASED ON THE IDEA PRESENTED IN http://bret.appspot.com/entry/experimenting-google-app-engine
+
 import logging, os
 
 # Google App Engine imports.
