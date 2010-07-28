@@ -32,7 +32,10 @@
 			{%if not user%}
 				<a href="{{login_url}}">{%trans "Login"%}</a>
 			{%else%}
-				<a href="/blog/entry/new/">{%trans "New entry"%}</a>
+				<a href="{{logout_url}}">{%trans "Logout"%}</a>
+				{%if is_admin%}
+					<a href="/blog/entry/new/">{%trans "New Entry"%}</a>
+				{%endif%}
 			{%endif%}
 			
 			<div id="powered">

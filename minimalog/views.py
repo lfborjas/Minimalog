@@ -8,6 +8,7 @@ from google.appengine.ext import db
 PAGINATION = 3
 import functools
 from django.conf import settings
+from django.template import RequestContext
 
 def administrator(method):
     @functools.wraps(method)
@@ -23,7 +24,7 @@ def administrator(method):
             return method(request, *args, **kwargs)
     return wrapper
 
-#@administrator
+@administrator
 def new(request):
     """Create a new blog post"""
     if request.method == "POST":
@@ -40,9 +41,9 @@ def new(request):
             entry.put()
             return HttpResponseRedirect(entry.get_absolute_url())
         else:
-            return render_to_response('edit.html', {'form': form})
+            return render_to_response('edit.html', {'form': form}, context_instance=RequestContext(request))
     else:
-        return render_to_response('edit.html', {'form': EntryForm()})
+        return render_to_response('edit.html', {'form': EntryForm()}, context_instance=RequestContext(request))
 
 def entry(request, slug):
     entry = db.Query(Entry).filter("slug =", slug).fetch(limit=1)
@@ -52,7 +53,8 @@ def entry(request, slug):
     return render_to_response('list.html', {'entries': entry,
                                              'show_next': False,
                                              'comments': True,
-                                             'debug': settings.DEBUG})
+                                             'debug': settings.DEBUG},
+                                             context_instance=RequestContext(request))
     
 def page(request, page_number=0):      
     ofs = int((PAGINATION*int(page_number))+PAGINATION)    
@@ -64,4 +66,5 @@ def page(request, page_number=0):
                                              'show_next': show_next,
                                              'comments': False,
                                              'debug': settings.DEBUG,
-                                             'previous_page': int(page_number)+1})
+                                             'previous_page': int(page_number)+1},
+                                             context_instance=RequestContext(request))
