@@ -14,8 +14,8 @@ def administrator(method):
     def wrapper(request, *args, **kwargs):
         user = users.get_current_user()
         if not user:
-            if request.method == "GET":
-                return HttpResponseRedirect(users.create_login_url(request.path))               
+            #if request.method == "GET":
+            return HttpResponseRedirect(users.create_login_url(request.path))               
             
         elif not users.is_current_user_admin():
             return HttpResponseRedirect('/')
@@ -58,10 +58,10 @@ def page(request, page_number=0):
     ofs = int((PAGINATION*int(page_number))+PAGINATION)    
     show_next = bool(db.Query(Entry).order("-published").fetch(limit=3, offset=(ofs)))
     entries = db.Query(Entry).order("-published").fetch(limit=3, offset=int(PAGINATION*int(page_number)))
-    if not entries:
+    if page_number and not entries:
         return HttpResponseRedirect('/blog/')
     return render_to_response('list.html', {'entries': entries,
                                              'show_next': show_next,
-                                             'comments': True,
+                                             'comments': False,
                                              'debug': settings.DEBUG,
                                              'previous_page': int(page_number)+1})

@@ -7,6 +7,7 @@ from django.views.generic.simple import redirect_to, direct_to_template
 urlpatterns = patterns('',
     (r'^blog/', include('minimalog.urls')),
     (r'^contact/', direct_to_template, {'template': 'contact.html'}),
+    #(r'^projects/', direct_to_template, {'template': 'projects.html'}),
     (r'^$', redirect_to, {'url': '/blog/'}),
     # Example:
     # (r'^blog/', include('blog.foo.urls')),

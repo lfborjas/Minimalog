@@ -5,6 +5,7 @@
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
         <meta http-equiv="Content-Style-Type" content="text/css" />
 		<meta name="description" content="lfborjas on the internerd: web development and life" />
+		<meta property="fb:admins" content="1375997733" />
         <title>{%trans "lfborjas on the internerd"%}</title>
         <link rel="icon" href="/images/favicon.ico" type="image/x-icon" />
         <link rel="stylesheet" type="text/css" href="/css/base.css" media="screen" /> 
@@ -15,10 +16,11 @@
 	<div id="main-container">
 		<div id="header">
 			<div id="branding">
-				<span id="brand">lfborjas</span>				
+				<a href="/"><span id="brand">lfborjas</span></a>				
 			</div>
 			<div id="menu">
 				<a href="/contact/">{%trans "Contact"%}</a>
+				{#<li><a href="/projects/">{%trans "Projects"%}</a></li>#}				
 			</div>
 		</div>
 		<div id="content">			
@@ -26,9 +28,13 @@
 			{%endblock%}
 		</div>
 		<div id="footer">
-			<span class="author-info">
-				{%now "Y"%} - Luis Felipe Borjas R.
-			</span>
+			{#<span class="author-info">{%now "Y"%} - Luis Felipe Borjas R.</span>#}
+			{%if not user%}
+				<a href="{{login_url}}">{%trans "Login"%}</a>
+			{%else%}
+				<a href="/blog/entry/new/">{%trans "New entry"%}</a>
+			{%endif%}
+			
 			<div id="powered">
 				<img src="http://code.google.com/appengine/images/appengine-noborder-120x30.gif" 
 					alt="{%trans 'Powered by Google App Engine' %}" />
@@ -36,13 +42,14 @@
 			<div id="license">
 			<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">
 			<img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png" /></a>
+			{%comment%}
 			<br />This <span xmlns:dc="http://purl.org/dc/elements/1.1/" href="http://purl.org/dc/dcmitype/Text" rel="dc:type">work
 			</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://www.lfborjas.com" 
 			property="cc:attributionName" rel="cc:attributionURL">lfborjas</a>
 			is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">
 			Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
-			</div>
-			
+			{%endcomment%}
+			</div>			
 		</div>
 	</div>
 	{%block endscripts%}

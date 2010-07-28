@@ -4,6 +4,11 @@ body{
 	color: #7E7E7E;
 }
 
+a{
+	font-weight: bold;
+	color: #4EC714;	
+}
+
 h2{
 	color: #333333;
 	font-size: 1.5333em;
@@ -11,10 +16,12 @@ h2{
 .date{
 	color: #525252;
 	font-size: 1.4em;
+	text-indent: -300px;
 }
 
 p.entry{
 	font-size: 1.3em;
+	text-align: justify;
 }
 
 .title-link{
@@ -37,7 +44,8 @@ p.entry{
 	color: #999999;
 	font-size: 0.7em;
 	margin: 0 auto;
-	text-align: right;
+	text-align: center;
+	width: 600px;
 }
 
 /*color theme: http://colorschemedesigner.com/#2G11TsOsOK-K-*/
@@ -63,6 +71,11 @@ p.entry{
 	font-family: 'Lucida Console', Monaco, Courier New, monospace;
 	font-size: 1.7em;
 	padding-left: 5px;
+}
+
+#branding a{
+	text-decoration: none;
+	color: #3EC313;
 }
 
 #header #menu{

@@ -1,18 +1,29 @@
 {%extends "base.html"%}
+{%load i18n%}
 {%block content%}
 	{%for entry in entries%}
-		<h2><a href="{{entry.get_absolute_url}}" class="title-link">{{entry.title}}</a></h2>
-		<h3 class="date">{{entry.published|date:"l, d/m/Y H:i"}}</h3>
+		<h3 class="date">{{entry.published|date:"l, d-m-Y"}}</h3>		
+		<h2><a href="{{entry.get_absolute_url}}" class="title-link"><span class="rss-title">{{entry.title}}</span></a></h2>		
 		<p class="entry">
+			<span class="rss-content">
 			{{entry.body|safe}}
-		</p>
-		<a href="{{entry.get_absolute_url}}#disqus_thread">Comments</a>		
-	{%endfor%}
+			</span>
+		</p>		
+		<!-- <span class="rss-link rss-id">http://www.lfborjas.com{{entry.get_absolute_url}}</span> -->	
 	{%if comments%}
+			{#this means that this is a singular entry#}
+			<div id="share">
+				<!-- Share on twitter -->
+				<script type="text/javascript">
+					tweetmeme_style = 'compact';
+				</script>
+				<script type="text/javascript" src="http://tweetmeme.com/i/scripts/button.js"></script>
+				<!-- Share on facebook -->
+				<fb:like layout="button_count" action="recommend" font="arial"></fb:like>					
+			</div>
 			<div id="disqus_thread"></div>
-			<script type="text/javascript">
-  			
-    		var disqus_identifier = {{entry.slug}} 
+			<script type="text/javascript">  			
+    		var disqus_identifier = "http://www.lfborjas.com{{entry.get_absolute_url}}"; 
     		{%if debug%}
     			var disqus_developer=1;
     		{%endif%} 
@@ -23,14 +34,18 @@
   			})();	
 			</script>
 			<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=lfborjas">comments powered by Disqus.</a></noscript>
-			<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>		
+			<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+	{%else%}
+		<a href="{{entry.get_absolute_url}}#disqus_thread">Comments</a>		
 	{%endif%}
+	{%endfor%}
 	{%if show_next%}		
-		<a href="/blog/page/{{previous_page}}/">&lt;&lt;Previous Posts</a>		
+		<a class="pagination" href="/blog/page/{{previous_page}}/">&lt;&lt;{%trans "Previous Posts"%}</a>		
 	{%endif%}
 {%endblock%}
 
 {%block endscripts%}
+	<div id="fb-root"></div>
 	<script type="text/javascript">
 		var disqus_shortname = 'lfborjas';
 		(function () {
@@ -39,4 +54,16 @@
   			(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
 		}());
 	</script>	
+	<script>/*
+  	window.fbAsyncInit = function() {
+    FB.init({appId: '', status: true, cookie: true,
+             xfbml: true});
+  	};
+  	(function() {
+    var e = document.createElement('script'); e.async = true;
+    e.src = document.location.protocol +
+      '//connect.facebook.net/en_US/all.js';
+    document.getElementById('fb-root').appendChild(e);
+  	}());
+	*/</script>
 {%endblock%}
