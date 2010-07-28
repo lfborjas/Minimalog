@@ -50,7 +50,7 @@
 {%endblock%}
 
 {%block endscripts%}
-	<div id="fb-root"></div>
+	
 	<script type="text/javascript">
 		var disqus_shortname = 'lfborjas';
 		(function () {
@@ -58,10 +58,12 @@
   			s.src = 'http://disqus.com/forums/lfborjas/count.js';
   			(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
 		}());
-	</script>	
+	</script>
+	{%if comments%}
+	<div id="fb-root"></div>	
 	<script>
   	window.fbAsyncInit = function() {
-    FB.init({appId: '{{FACEBOOK_API_KEY}}', status: true, cookie: true,
+    FB.init({appId: '{{fb_key}}', status: true, cookie: true,
              xfbml: true});
   	};
   	(function() {
@@ -71,4 +73,5 @@
     document.getElementById('fb-root').appendChild(e);
   	}());
 	</script>
+	{%endif%}
 {%endblock%}
