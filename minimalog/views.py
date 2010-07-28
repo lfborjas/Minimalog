@@ -50,12 +50,18 @@ def entry(request, slug):
         return HttpResponseRedirect('/')
     
     return render_to_response('list.html', {'entries': entry,
-                                             'show_more': False,
+                                             'show_next': False,
                                              'comments': True,
                                              'debug': settings.DEBUG})
     
-def page(request, page_number):
-    return render_to_response('list.html', {'entries': db.Query(Entry).fetch(limit=3, offset=PAGINATION*page),
-                                             'show_more': False,
+def page(request, page_number=0):      
+    ofs = int((PAGINATION*int(page_number))+PAGINATION)    
+    show_next = bool(db.Query(Entry).order("-published").fetch(limit=3, offset=(ofs)))
+    entries = db.Query(Entry).order("-published").fetch(limit=3, offset=int(PAGINATION*int(page_number)))
+    if not entries:
+        return HttpResponseRedirect('/blog/')
+    return render_to_response('list.html', {'entries': entries,
+                                             'show_next': show_next,
                                              'comments': True,
-                                             'debug': settings.DEBUG})
+                                             'debug': settings.DEBUG,
+                                             'previous_page': int(page_number)+1})

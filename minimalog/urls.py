@@ -2,7 +2,7 @@ from django.conf.urls.defaults import *
 
 urlpatterns = patterns('minimalog.views',
     (r'^$', 'page'),                   
-    (r'^page/(?P<page_number>\d+)/$', 'page'),
+    (r'^page/(?P<page_number>[0-9]+)/$', 'page'),
     (r'^entry/new/$', 'new'),
     (r'^entry/(?P<slug>[-\w\d]+)/$', 'entry'),        
     #(r'^edit/(?P<entry_id>\d+)/$', 'edit'),
