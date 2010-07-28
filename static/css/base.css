@@ -1,7 +1,8 @@
 body{
-	font: normal normal normal 14px/normal Arial, Helvetica, sans-serif;
+	font: normal normal normal 16px/normal Arial, Helvetica, sans-serif;
 	background: #fff;
 	color: #7E7E7E;
+	font-size: 1.1em;
 }
 
 a{
@@ -19,9 +20,9 @@ h2{
 	text-indent: -300px;
 }
 
-p.entry{
-	font-size: 1.3em;
-	text-align: justify;
+p{
+	/*font-size: 1.3em;*/
+	text-align: justify !important;
 }
 
 .title-link{

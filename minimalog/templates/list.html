@@ -2,14 +2,15 @@
 {%load i18n%}
 {%block content%}
 	{%for entry in entries%}
-		<h3 class="date">{{entry.published|date:"l, d-m-Y"}}</h3>		
+		<h3 class="date">{{entry.published|date:"l, F d Y"}}</h3>		
 		<h2><a href="{{entry.get_absolute_url}}" class="title-link"><span class="rss-title">{{entry.title}}</span></a></h2>		
-		<p class="entry">
+		<div class="entry">
 			<span class="rss-content">
 			{{entry.body|safe}}
 			</span>
-		</p>		
-		<!-- <span class="rss-link rss-id">http://www.lfborjas.com{{entry.get_absolute_url}}</span> -->	
+		</div>		
+		<!-- <span class="rss-id">http://www.lfborjas.com{{entry.get_absolute_url}}</span> -->
+		<!-- <span class="rss-link">http://www.lfborjas.com{{entry.get_absolute_url}}</span> -->	
 	{%if comments%}
 			{#this means that this is a singular entry#}
 			<div id="share">

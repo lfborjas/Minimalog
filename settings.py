@@ -1,7 +1,7 @@
 #encoding=utf-8
 # Django settings for blog project.
 import os
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ROOT_PATH = os.path.dirname(__file__)
