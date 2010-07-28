@@ -7,6 +7,11 @@ from google.appengine.ext.webapp import util
 # 'project' is the name of the project created with django-admin.py
 os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 
+#purge the old django
+#import sys
+#for k in [k for k in sys.modules if k.startswith('django')]: 
+#    del sys.modules[k] 
+
 #Use django 1.1
 from google.appengine.dist import use_library
 use_library('django', '1.1')
