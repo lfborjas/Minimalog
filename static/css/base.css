@@ -6,7 +6,7 @@ body{
 }
 
 a{
-	font-weight: bold;
+	/*font-weight: bold;*/
 	color: #4EC714;	
 }
 
@@ -154,4 +154,15 @@ p{
 
 #id_title, #id_slug{
 	width: 90%;
+}
+
+.pagination{
+	font-size: 1.2em;
+	display: block;
+	text-align: center;
+}
+
+.pagination:hover{
+	text-decoration: none;
+	color: #333333; 
 }
