@@ -54,9 +54,9 @@
   			(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
 		}());
 	</script>	
-	<script>/*
+	<script>
   	window.fbAsyncInit = function() {
-    FB.init({appId: '', status: true, cookie: true,
+    FB.init({appId: '{{FACEBOOK_API_KEY}}', status: true, cookie: true,
              xfbml: true});
   	};
   	(function() {
@@ -65,5 +65,5 @@
       '//connect.facebook.net/en_US/all.js';
     document.getElementById('fb-root').appendChild(e);
   	}());
-	*/</script>
+	</script>
 {%endblock%}
