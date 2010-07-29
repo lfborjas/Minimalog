@@ -3,6 +3,7 @@ from django.conf import settings
 from django.views.generic.simple import redirect_to, direct_to_template
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
+from django.contrib.auth.views import login, logout
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -19,9 +20,15 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     (r'^admin/', include(admin.site.urls)),
+    #These are already provided by django!
+    (r'login/', login, {'template_name': 'login.html'}),
+    (r'logout/', logout, {'next_page': '/blog/'}),
 )
 
 if settings.DEBUG:
-    urlpatterns += patterns('',        
+    urlpatterns += patterns('',       
+        (r'^images/(?P<path>.*)$', redirect_to, {'url': '/static/images/%(path)s'}),
+        (r'^css/(?P<path>.*)$', redirect_to, {'url': '/static/css/%(path)s'}),
+        (r'^js/(?P<path>.*)$', redirect_to, {'url': '/static/js/%(path)s'}),
         (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_DOC_ROOT}),
     )

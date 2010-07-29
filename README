@@ -1,5 +1,11 @@
 Minimalog is a blogging application created with django for the app engine infrastructure.
 
+To check it out:
+python manage.py syncdb
+python manage.py runserver
+go to a browser and type http://localhost:8000/
+
+
 Inspired by: http://bret.appspot.com/entry/experimenting-google-app-engine
 
 It was created more by whim than by need: I wanted to design a minimalist blog and host it in appengine in an afternoon; and customizing the other appengine-ready blogging engines wasn't the way to go. As an intermediate django developer, I realized that my goal could be met if I created just a minimum viable solution, and expand it when needed.

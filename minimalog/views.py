@@ -19,7 +19,9 @@ def new(request):
     if request.method == "POST":
         form = EntryForm(request.POST)
         if form.is_valid():
-            entry =  form.save()
+            entry =  form.save(commit = False)
+            entry.author = request.user
+            entry.save()
             return HttpResponseRedirect(entry.get_absolute_url())
         else:
             return render_to_response('edit.html', {'form': form}, context_instance=RequestContext(request))

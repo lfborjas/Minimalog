@@ -1,0 +1,18 @@
+{%extends "base.html"%}
+{%load i18n%}
+{%block content%}
+	<form method="post" action="{% url django.contrib.auth.views.login %}" id="login-form">
+	<table>
+	<tr>
+    	<td>{{ form.username.label_tag }}</td>
+    	<td>{{ form.username }}</td>
+	</tr>
+	<tr>
+    	<td>{{ form.password.label_tag }}</td>
+    	<td>{{ form.password }}</td>
+	</tr>
+	</table>
+	<input type="submit" value="{%trans 'login'%}" id="login-submit" class="submit-post"/>
+	<input type="hidden" name="next" value="{{ next }}" />
+</form>
+{%endblock%}

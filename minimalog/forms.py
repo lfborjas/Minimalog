@@ -14,4 +14,5 @@ class EntryForm(forms.ModelForm):
     
     class Meta:
         model = Entry
+        exclude = ('author',)
     

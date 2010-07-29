@@ -1,7 +1,7 @@
 #encoding=utf-8
 # Django settings for blog project.
 import os
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ROOT_PATH = os.path.dirname(__file__)
@@ -86,16 +86,21 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.contenttypes',
     'django.contrib.sites',
+    'minimalog',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
-                               "django.contrib.auth.context_processors.auth",
+                               "django.core.context_processors.auth",
                                "django.core.context_processors.debug",
                                "django.core.context_processors.i18n",
                                "django.core.context_processors.media",                               
                                )
 
 FACEBOOK_API_KEY =  "YOUR-FACEBOOK-KEY"
+
+STATIC_DOC_ROOT = os.path.join(ROOT_PATH, 'static')
+
+LOGIN_REDIRECT_URL = "/"
 
 try:
     from local_settings import *
