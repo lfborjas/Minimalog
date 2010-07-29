@@ -1,12 +1,12 @@
-from google.appengine.ext import db
 from django.db import models
+from django.contrib.auth.models import User 
 
-class Entry(db.Model):
-    author = db.UserProperty()
-    title = db.StringProperty(required=True)
-    slug = db.StringProperty(required=True)
-    body = db.TextProperty(required=True)
-    published = db.DateTimeProperty(auto_now_add=True)
+class Entry(models.Model):
+    author = models.ForeignKey(User)
+    title = models.CharField(max_length=255)
+    slug = models.SlugField(unique = True)
+    body = models.TextField()
+    published = models.DateTimeField(auto_now_add=True)
     #updated = db.DateTimeProperty(auto_now=True)
 
     @models.permalink

@@ -3,15 +3,11 @@
 {%block content%}
 	{%for entry in entries%}
 		<h3 class="date">{{entry.published|date:"l, F d Y"}}</h3>		
-		<h2><a href="{{entry.get_absolute_url}}" class="title-link"><span class="rss-title">{{entry.title}}</span></a></h2>		
-		<div class="entry">
-			<span class="rss-content">
-			{{entry.body|safe}}
-			</span>
-		</div>		
-		<!-- <span class="rss-id">http://www.lfborjas.com{{entry.get_absolute_url}}</span> -->
-		<!-- <span class="rss-link">http://www.lfborjas.com{{entry.get_absolute_url}}</span> -->	
-	{%if comments%}
+		<h2><a href="{{entry.get_absolute_url}}" class="title-link">{{entry.title}}</a></h2>		
+		<div class="entry">			
+			{{entry.body|safe}}			
+		</div>	
+	{%if comments%} 
 			{#this means that this is a singular entry#}
 			<div id="share">
 				<!-- Share on twitter -->
@@ -20,58 +16,13 @@
 						tweetmeme_style = 'compact';
 					</script>
 					<script type="text/javascript" src="http://tweetmeme.com/i/scripts/button.js"></script>
-				</div>						
-				<!-- Share on facebook -->
-				<div id="facebook-share">
-					<fb:like layout="button_count" action="recommend" font="arial"></fb:like>
-				</div>					
-			</div>
-			<div id="disqus_thread"></div>
-			<script type="text/javascript">  			
-    		var disqus_identifier = "http://www.lfborjas.com{{entry.get_absolute_url}}"; 
-    		{%if debug%}
-    			var disqus_developer=1;
-    		{%endif%} 
-  			(function() {
-   				var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-   				dsq.src = 'http://lfborjas.disqus.com/embed.js';
-   				(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-  			})();	
-			</script>
-			<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=lfborjas">comments powered by Disqus.</a></noscript>
-			<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+				</div>										
+			</div>			
 	{%else%}
-		<a href="{{entry.get_absolute_url}}#disqus_thread">Comments</a>		
+		<a href="{{entry.get_absolute_url}}">Comments</a>		
 	{%endif%}
 	{%endfor%}
 	{%if show_next%}		
 		<a class="pagination" href="/blog/page/{{previous_page}}/">&lt;&lt;{%trans "Previous Posts"%}</a>		
-	{%endif%}
-{%endblock%}
-
-{%block endscripts%}
-	
-	<script type="text/javascript">
-		var disqus_shortname = 'lfborjas';
-		(function () {
-  			var s = document.createElement('script'); s.async = true;
-  			s.src = 'http://disqus.com/forums/lfborjas/count.js';
-  			(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-		}());
-	</script>
-	{%if comments%}
-	<div id="fb-root"></div>	
-	<script>
-  	window.fbAsyncInit = function() {
-    FB.init({appId: '{{fb_key}}', status: true, cookie: true,
-             xfbml: true});
-  	};
-  	(function() {
-    var e = document.createElement('script'); e.async = true;
-    e.src = document.location.protocol +
-      '//connect.facebook.net/en_US/all.js';
-    document.getElementById('fb-root').appendChild(e);
-  	}());
-	</script>
 	{%endif%}
 {%endblock%}
