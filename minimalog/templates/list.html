@@ -1,12 +1,12 @@
 {%extends "base.html"%}
-{%load i18n%}
+{%load i18n markup%}
 {%block content%}
 	{%for entry in entries%}
 		<h3 class="date">{{entry.published|date:"l, F d Y"}}</h3>		
 		<h2><a href="{{entry.get_absolute_url}}" class="title-link"><span class="rss-title">{{entry.title}}</span></a></h2>		
 		<div class="entry">
 			<span class="rss-content">
-			{{entry.body|safe}}
+			{{entry.body|markdown}}
 			</span>
 		</div>		
 		<!-- <span class="rss-id">http://www.lfborjas.com{{entry.get_absolute_url}}</span> -->

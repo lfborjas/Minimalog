@@ -2,6 +2,7 @@
 {%load i18n%}
 {%block scripts%}
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js "></script>
+	<script src="/js/showdown.js"></script>
 	<script>
 		$(function(){
 		jQuery.fn.slugify = function(obj) {
@@ -13,7 +14,20 @@
     	});		
     	}
     	//convert the title in a slug
-		$('#id_title').slugify('#id_slug');	
+		$('#id_title').slugify('#id_slug');
+		
+		//for markdown_
+		//cf: http://stackoverflow.com/questions/2874646/which-stackoverflow-style-markdown-wmd-javascript-editor-should-i-use
+		//http://attacklab.net/showdown/				
+		 var converter = new Showdown.converter();
+    	function update_description_preview(){
+        	$('#post-preview').html(converter.makeHtml($("#id_body").val()));
+    	}
+    	//update_description_preview();
+
+    	$("#id_body").keyup(function(){
+        	update_description_preview();
+    	});	
 		});
 		
     	
@@ -24,6 +38,7 @@
 	<h1>{%trans "Create new entry"%}</h1>
 	<form id="edit-entry" action="/blog/entry/new/" method="post">
 		{{form.as_p}}
+		<div id="post-preview"></div>
 		<button class="submit-post" type="submit">
 			<img src="/images/check.png"></img>
 			<span>Post</span>
